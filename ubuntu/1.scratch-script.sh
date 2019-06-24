@@ -69,5 +69,19 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 mkdir -p $HOME/.config/Code/User
 cp ./vscode/settings.json $HOME/.config/Code/User/settings.json
 
+## DOCK
+### BOTTOM
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
+### TRANSPARENCY
+gsettings set org.gnome.shell.extensions.dash-to-dock transparency-mode 'FIXED'
+## NO STRETCH
+gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
+### SIZE
+gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 28
+### TITLEBAR ICONS LEFT
+gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:'
+### SHOW WEEKS IN CALENDAR
+gsettings set org.gnome.desktop.calendar show-weekdate true
+
 ## Sanity cleanup
 sudo apt-get update -y ; sudo apt-get upgrade -y ; sudo apt-get autoremove -y
