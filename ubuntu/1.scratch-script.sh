@@ -1,42 +1,39 @@
 #!/bin/bash
 [ -z "${UBUNTU_CODENAME}" ] && echo "UBUNTU_CODENAME not specified" && exit 1
+[ -z "${HOME}" ] && echo "HOME not specified" && exit 1
 # https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 sudo apt-get update -y ; sudo apt-get upgrade -y
 sudo snap install --classic git
-mkdir -p ~/git
-## CURL
+mkdir -p $HOME/git
+
+## APPS AND THEMES
 sudo apt-get install -y curl wget terminator net-tools kdiff3
+sudo apt-get install -y arc-theme gnome-tweak-tool numix-gtk-theme numix-icon-theme-circle
 
 ## ZSH
 sudo apt install zsh -y
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 sudo apt install fonts-powerline -y
-cp ~/.zshrc ~/.zshrc-orig
-sed -i 's/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"agnoster\"/g' ~/.zshrc
-mkdir -p ~/.fonts
-cd ~/.fonts
-wget https://github.com/abertsch/Menlo-for-Powerline/archive/master.zip
-unzip master.zip
-rm master.zip
-fc-cache -vf ~/.fonts
-cd ~
-
-nano ~/.oh-my-zsh/themes/agnoster.zsh-theme
-cd ~/.oh-my-zsh/custom/plugins
-git clone https://github.com/zsh-users/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions
-sed -i 's/plugins\=(/plugins\=(zsh-autosuggestions zsh-syntax-highlighting /g' ~/.zshrc
+cp $HOME/.zshrc $HOME/.zshrc-orig
+sed -i 's/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"agnoster\"/g' $HOME/.zshrc
+git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+sed -i 's/plugins\=(/plugins\=(zsh-autosuggestions zsh-syntax-highlighting /g' $HOME/.zshrc
+mkdir -p $HOME/.fonts
+wget https://github.com/abertsch/Menlo-for-Powerline/archive/master.zip -O $HOME/.fonts/master.zip
+unzip $HOME/.fonts/master.zip
+rm $HOME/.fonts/master.zip
+fc-cache -vf $HOME/.fonts
+#### Copy alias to ZSH
+cat zshrc-alias >> $HOME/.zshrc
 
 ## BRAVE
 curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
 source /etc/os-release
-
 echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_CODENAME main" | sudo tee /etc/apt/sources.list.d/brave-browser-release-${UBUNTU_CODENAME}.list
-
 sudo apt-get update -y
-
 sudo apt-get install brave-keyring brave-browser -y
 
 ## DOCKER
@@ -67,6 +64,10 @@ sudo snap install vlc
 
 ## NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+## VSCODE SETTINGS
+mkdir -p $HOME/.config/Code/User
+cp ./vscode/settings.json $HOME/.config/Code/User/settings.json
 
 ## Sanity cleanup
 sudo apt-get update -y ; sudo apt-get upgrade -y ; sudo apt-get autoremove -y

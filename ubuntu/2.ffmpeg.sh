@@ -98,5 +98,12 @@ PATH="$HOME/.bin:$PATH" PKG_CONFIG_PATH="$FFMPEG_HOME/ffmpeg_build/lib/pkgconfig
 PATH="$HOME/.bin:$PATH" make -j 4 && \
 make install ; hash -r
 
+sudo wget -q -O - https://mkvtoolnix.download/gpg-pub-moritzbunkus.txt | sudo apt-key add -
+sudo add-apt-repository "deb https://mkvtoolnix.download/ubuntu/ $(lsb_release -cs) main"
+sudo apt-get install mediainfo mediainfo-gui mkvtoolnix mkvtoolnix-gui -y
+
+## Sanity cleanup
+sudo apt-get update -y ; sudo apt-get upgrade -y ; sudo apt-get autoremove -y
+
 exec $SHELL -l
 ffmpeg -encoders 2>/dev/null | grep nvenc
