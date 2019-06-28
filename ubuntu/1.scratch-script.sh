@@ -9,7 +9,7 @@ sudo snap install --classic git
 mkdir -p $HOME/git
 
 ## APPS AND THEMES
-sudo apt-get install -y curl wget terminator net-tools kdiff3
+sudo apt-get install -y curl wget terminator net-tools kdiff3 htop
 sudo apt-get install -y arc-theme gnome-tweak-tool numix-gtk-theme numix-icon-theme-circle
 
 ## ZSH
