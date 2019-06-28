@@ -2,7 +2,7 @@
 [ -z "${UBUNTU_CODENAME}" ] && echo "UBUNTU_CODENAME not specified" && exit 1
 [ -z "${HOME}" ] && echo "HOME not specified" && exit 1
 # https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+# echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 sudo apt-get update -y ; sudo apt-get upgrade -y
 sudo snap install --classic git
