@@ -12,6 +12,9 @@ mkdir -p $HOME/git
 sudo apt-get install -y curl wget terminator net-tools kdiff3 htop
 sudo apt-get install -y arc-theme gnome-tweak-tool numix-gtk-theme numix-icon-theme-circle
 
+## Yubikey
+sudo wget -O /etc/udev/rules.d/70-u2f.rules https://raw.githubusercontent.com/Yubico/libu2f-host/master/70-u2f.rules
+
 ## ZSH
 sudo apt install zsh -y
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
