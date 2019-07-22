@@ -13,7 +13,6 @@ else
 fi
 
 mkdir -p $HOME/git
-[ -z "${NUMIX_ICON}" ] && echo "NUMIX_ICON not specified" && exit 1
 
 ## APPS AND THEMES
 sudo apt-get install -y curl wget terminator net-tools kdiff3 htop arc-theme gnome-tweak-tool numix-gtk-theme chrome-gnome-shell
