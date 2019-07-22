@@ -6,19 +6,17 @@
 
 sudo apt-get update -y ; sudo apt-get upgrade -y
 if [ $UBUNTU_CODENAME == "bionic" ]; then
-  sudo apt-get install -y git
-  NUMIX_ICON=numix-icon-theme
+  sudo apt-get install -y git numix-icon-theme
 else
   sudo snap install --classic git
-  NUMIX_ICON=numix-icon-theme-circle
+  sudo apt-get install -y numix-icon-theme-circle
 fi
 
 mkdir -p $HOME/git
 [ -z "${NUMIX_ICON}" ] && echo "NUMIX_ICON not specified" && exit 1
 
 ## APPS AND THEMES
-sudo apt-get install -y curl wget terminator net-tools kdiff3 htop
-sudo apt-get install -y arc-theme gnome-tweak-tool numix-gtk-theme $NUMIX_ICON chrome-gnome-shell
+sudo apt-get install -y curl wget terminator net-tools kdiff3 htop arc-theme gnome-tweak-tool numix-gtk-theme chrome-gnome-shell
 
 ## Yubikey
 sudo wget -O /etc/udev/rules.d/70-u2f.rules https://raw.githubusercontent.com/Yubico/libu2f-host/master/70-u2f.rules
