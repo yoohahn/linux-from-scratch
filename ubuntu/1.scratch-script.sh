@@ -5,7 +5,7 @@
 # echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 sudo apt-get update -y ; sudo apt-get upgrade -y
-if [ $UBUNTU_CODENAME -eq "bionic" ]; then
+if [ $UBUNTU_CODENAME == "bionic" ]; then
   sudo apt-get install -y git
   NUMIX_ICON=numix-icon-theme
 else
