@@ -34,7 +34,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/cust
 sed -i 's/plugins\=(/plugins\=(zsh-autosuggestions zsh-syntax-highlighting /g' $HOME/.zshrc
 mkdir -p $HOME/.fonts
 wget https://github.com/abertsch/Menlo-for-Powerline/archive/master.zip -O $HOME/.fonts/master.zip
-unzip $HOME/.fonts/master.zip
+unzip $HOME/.fonts/master.zip -d $HOME/.fonts/
 rm $HOME/.fonts/master.zip
 fc-cache -vf $HOME/.fonts
 #### Copy alias to ZSH
