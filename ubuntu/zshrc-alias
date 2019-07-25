@@ -45,3 +45,6 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
+
+# Container alias
+alias youtube-dl='docker run --rm -u $UID:$GID -v $PWD:/temp yoohahn/youtube-dl
