@@ -1,6 +1,7 @@
 # ENV
 [ -z "$UID" ] && export UID=$(id -u)
 [ -z "$GID" ] && export GID=$(id -g)
+[ -z "$USER" ] && export USER=$(whoami)
 
 # ALIAS
 alias ..="cd .."
