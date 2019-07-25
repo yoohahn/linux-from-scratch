@@ -1,3 +1,8 @@
+# ENV
+[ -z "$UID" ] && export UID=$(id -u)
+[ -z "$GID" ] && export GID=$(id -g)
+
+# ALIAS
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
