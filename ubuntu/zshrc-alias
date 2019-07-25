@@ -48,3 +48,4 @@ alias reload="exec $SHELL -l"
 
 # Container alias
 alias youtube-dl='docker run --rm -u $UID:$GID -v $PWD:/temp yoohahn/youtube-dl'
+alias svtplay-dl='docker run --rm -u $UID:$GID -v $PWD:/temp yoohahn/svtplay-dl'
