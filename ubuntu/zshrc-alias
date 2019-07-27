@@ -2,6 +2,7 @@
 [ -z "$UID" ] && export UID=$(id -u)
 [ -z "$GID" ] && export GID=$(id -g)
 [ -z "$USER" ] && export USER=$(whoami)
+[ -z "$DOCKER_XAUTH" ] && export DOCKER_XAUTH=${XAUTHORITY:-$HOME/.Xauthority}.docker
 
 # ALIAS
 alias ..="cd .."
