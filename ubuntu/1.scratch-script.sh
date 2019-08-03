@@ -28,7 +28,7 @@ sudo apt-get install brave-keyring brave-browser -y
 sudo apt-get install apt-transport-https ca-certificates software-properties-common -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $UBUNTU_CODENAME stable"
-sudo apt-get install docker docker.io docker-compose -y
+sudo apt-get install docker-ce docker.io docker-compose -y
 sudo groupadd docker
 sudo usermod -aG docker $USER
 
