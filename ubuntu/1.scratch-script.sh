@@ -10,6 +10,7 @@ sudo apt-add-repository ppa:git-core/ppa -y
 sudo apt-get update -y ; sudo apt-get upgrade -y
 
 mkdir -p $HOME/git
+mkdir -p $HOME/.bin
 
 ## APPS AND THEMES
 sudo apt-get install -y curl git wget terminator net-tools kdiff3 htop arc-theme gnome-tweak-tool numix-gtk-theme numix-icon-theme chrome-gnome-shell
