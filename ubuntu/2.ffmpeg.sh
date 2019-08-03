@@ -1,4 +1,5 @@
 #!/bin/bash
+echo 'Could run from docker images instead https://github.com/yoohahn/docker/tree/master/ffmpeg'
 [ -z "${SANITY}" ] && echo "Add SANITY=X before running! Make sure first file has been executed and computer rebooted." && exit 1
 [ -z "${HOME}" ] && echo "HOME not specified" && exit 1
 
