@@ -72,8 +72,8 @@ gsettings set org.gnome.desktop.calendar show-weekdate true
 ## ZSH
 sudo apt install zsh -y
 sudo apt install powerline fonts-powerline -y
-git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+cp $HOME/.oh-my-zsh/templates/zshrc.zsh-template $HOME/.zshrc
 cp $HOME/.zshrc $HOME/.zshrc-orig
 sed -i 's/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"agnoster\"/g' $HOME/.zshrc
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
