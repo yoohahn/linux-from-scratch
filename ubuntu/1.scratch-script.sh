@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 UBUNTU_CODENAME=$(lsb_release -cs)
 [ -z "${UBUNTU_CODENAME}" ] && echo "UBUNTU_CODENAME not specified" && exit 1
 [ -z "${HOME}" ] && echo "HOME not specified" && exit 1
