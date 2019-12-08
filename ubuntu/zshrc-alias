@@ -30,7 +30,7 @@ alias co="git checkout"
 alias ru="git ru"
 
 # Better copy
-alias cp="rsync -ah --progress"
+alias cpr="rsync -ah --progress"
 
 alias l="ls -lF"
 alias la="ls -laF"
