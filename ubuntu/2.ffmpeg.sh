@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 echo 'Could run from docker images instead https://github.com/yoohahn/docker/tree/master/ffmpeg'
 [ -z "${SANITY}" ] && echo "Add SANITY=X before running! Make sure first file has been executed and computer rebooted." && exit 1
 [ -z "${HOME}" ] && echo "HOME not specified" && exit 1
@@ -78,7 +78,7 @@ PATH="$HOME/.bin:$PATH" make && \
 make install
 
 cd $FFMPEG_HOME/ffmpeg_sources
-git clone git@github.com:FFmpeg/FFmpeg.git
+git clone https://github.com/FFmpeg/FFmpeg.git
 cd $FFMPEG_HOME/ffmpeg_sources/FFmpeg
 
 PATH="$HOME/.bin:$PATH" PKG_CONFIG_PATH="$FFMPEG_HOME/ffmpeg_build/lib/pkgconfig" ./configure \
