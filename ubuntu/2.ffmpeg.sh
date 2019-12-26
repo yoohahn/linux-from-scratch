@@ -3,8 +3,8 @@ echo 'Could run from docker images instead https://github.com/yoohahn/docker/tre
 [ -z "${SANITY}" ] && echo "Add SANITY=X before running! Make sure first file has been executed and computer rebooted." && exit 1
 [ -z "${HOME}" ] && echo "HOME not specified" && exit 1
 
-FFMPEG_HOME=~/.ffmpeg-build
-mkdir -p ~/.bin
+FFMPEG_HOME=$HOME/.ffmpeg-build
+mkdir -p $HOME/.bin
 mkdir -p $FFMPEG_HOME
 mkdir -p $FFMPEG_HOME/ffmpeg_sources && mkdir -p $FFMPEG_HOME/ffmpeg_build
 mkdir -p $FFMPEG_HOME/nv-codec-headers_build && cd $FFMPEG_HOME/nv-codec-headers_build

@@ -26,12 +26,24 @@ sudo apt-get update -y
 sudo apt-get install brave-keyring brave-browser -y
 
 ## DOCKER
+DOCKER_UBUNTU_CODENAME=$(lsb_release -cs)
+if [ "${DOCKER_UBUNTU_CODENAME}" = "eoan" ]
+  DOCKER_UBUNTU_CODENAME="disco"
+fi
+
 sudo apt-get install apt-transport-https ca-certificates software-properties-common -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $UBUNTU_CODENAME stable"
-sudo apt-get install docker-ce docker.io docker-compose -y
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $DOCKER_UBUNTU_CODENAME stable"
+
+if [ "${UBUNTU_CODENAME}" = "eoan" ]
+  sudo apt-get install docker-ce docker.io docker-compose -y
+else
+  sudo apt-get install docker-ce docker-compose -y
+fi
+
 sudo groupadd docker
 sudo usermod -aG docker $USER
+## END DOCKER
 
 ## VSCODE
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
@@ -42,11 +54,16 @@ sudo apt-get update -y
 sudo apt-get install code -y
 
 ## Graphics
-sudo apt-get purge nvidia* -y
-sudo add-apt-repository ppa:graphics-drivers -y
-sudo add-apt-repository ppa:graphics-drivers/ppa -y
-sudo apt-get update -y
-sudo apt install nvidia-driver-418 -y
+if [ "${UBUNTU_CODENAME}" = "eaon" ]; then
+  sudo ubuntu-drivers autoinstall
+  sudo apt install nvidia-driver-435
+else
+  sudo apt-get purge nvidia* -y
+  sudo add-apt-repository ppa:graphics-drivers -y
+  sudo add-apt-repository ppa:graphics-drivers/ppa -y
+  sudo apt-get update -y
+  sudo apt install nvidia-driver-435 -y
+fi
 
 ## VLC
 sudo snap install vlc
