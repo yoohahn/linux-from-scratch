@@ -34,12 +34,8 @@ fi
 sudo apt-get install apt-transport-https ca-certificates software-properties-common -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $DOCKER_UBUNTU_CODENAME stable"
-
-if [ "${UBUNTU_CODENAME}" = "eoan" ]
-  sudo apt-get install docker-ce docker.io docker-compose -y
-else
-  sudo apt-get install docker-ce docker-compose -y
-fi
+sudo apt-get update
+sudo apt-get install docker-ce docker-compose -y
 
 sudo groupadd docker
 sudo usermod -aG docker $USER
