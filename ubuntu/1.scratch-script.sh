@@ -104,7 +104,7 @@ fc-cache -vf $HOME/.fonts
 chsh -s /bin/zsh
 
 ## Copy alias to ZSH
-cat zshrc-alias >> $HOME/.zshrc
+cat zshrc-alias > $HOME/.zshrc
 
 ## NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
