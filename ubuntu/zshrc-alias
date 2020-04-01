@@ -1,64 +1,119 @@
-# ENV
-[ -z "$UID" ] && export UID=$(id -u)
-[ -z "$GID" ] && export GID=$(id -g)
-[ -z "$USER" ] && export USER=$(whoami)
-[ -z "$DOCKER_XAUTH" ] && export DOCKER_XAUTH=${XAUTHORITY:-$HOME/.Xauthority}.docker
-# NVM
+## Set som env vars
+export PATH=$HOME/.bin:/usr/local/sbin:$PATH
+export DOTNET_CLI_TELEMETRY_OPTOUT="1"
+export NO_LOG="1"
+export SKIP_IMAGES_FOR_CI=1
+export EDITOR="nano"
+
+## Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+	colorflag="--color"
+else # OS X `ls`
+	colorflag="-G"
+fi
+export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
+
+## ZSH
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="agnoster"
+plugins=(
+  git
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+)
+source $ZSH/oh-my-zsh.sh
+
+## NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH=/home/$USER/.bin:$PATH
+## Node / Yarn
+alias ntl="ntl -s 20 -i -A"
+alias yi="yarn install"
+alias yif="yarn install --frozen-lockfile"
+# Disable scripts for npm
+npm config set ignore-scripts true
 
-# ALIAS
+## Docker
+alias youtube-dl='docker run --rm -u $UID:$GID -v $PWD:/temp yoohahn/youtube-dl'
+alias svtplay-dl='docker run --rm -u $UID:$GID -v $PWD:/temp yoohahn/svtplay-dl'
+alias lspods="kubectl get pods"
+
+## Shortcuts
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias cpr="rsync -ah --progress"
+alias cls="clear"
+alias d="cd ~/Dropbox"
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias p="cd ~/git"
+alias h="history"
+# List all files colorized in long format
+alias l="ls -lF ${colorflag}"
+# List all files colorized in long format, including dot files
+alias la="ls -laF ${colorflag}"
+# List only directories
+alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
+# Always use color output for `ls`
+alias ls="command ls ${colorflag}"
+# Neofetch
+alias nf="clear ; neofetch"
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+# Show week
+alias week='date +%V'
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec $SHELL -l"
+alias list_chmod="stat -f '%A %N' "
+# Convert to gif
+to_gif(){
+  ffmpeg -i $1 -loop 0 -c:v gif -f gif $2
+}
+
+## Git
+alias g="git"
 alias rebase="git pull --rebase origin "
 alias pull="git pull"
 alias fetch="git fetch"
 alias gs="git status"
-alias ntl="ntl -s 20 -i -A"
-alias npmi="npm install --no-optional"
-
-# Shortcuts
-alias dl="cd ~/Downloads"
-alias p="cd ~/git"
-alias g="git"
+alias gcm="git checkout master"
 alias co="git checkout"
 alias ru="git ru"
+alias gcf="git clean -fdx"
 
-# Better copy
-alias cpr="rsync -ah --progress"
-
-alias l="ls -lF"
-alias la="ls -laF"
-
-# Get week number
-alias week='date +%V'
-
-# Simple HTTP server
-alias simple_http="python -m SimpleHTTPServer 8000 ."
-
-# Stopwatch
-alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
-
-# IP addresses
-alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-
-# Recursively delete `.DS_Store` files
-alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-
-# Reload the shell (i.e. invoke as a login shell)
-alias reload="exec $SHELL -l"
-
-# Container alias
-alias youtube-dl='docker run --rm -u $UID:$GID -v $PWD:/temp yoohahn/youtube-dl'
-alias svtplay-dl='docker run --rm -u $UID:$GID -v $PWD:/temp yoohahn/svtplay-dl'
+export MY_OS=$(uname)
+if [[ $MY_OS == 'Linux' ]]; then
+  [ -z "$DOCKER_XAUTH" ] && export DOCKER_XAUTH=${XAUTHORITY:-$HOME/.Xauthority}.docker
+  # IP addresses
+  alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+  alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+elif [[ $MY_OS == 'Darwin' ]]; then
+  # Make sure that we get English in terminal for OSX
+  export LANG=en_US.UTF-8
+  ## KILL Apples photocrap on terminal launch
+  launchctl disable gui/$UID/com.apple.photoanalysisd 2> /dev/null
+  launchctl kill -TERM gui/$UID/com.apple.photoanalysisd 2> /dev/null
+  alias listdisk="diskutil list"
+  
+  # IP addresses
+  alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+  alias localip="ipconfig getifaddr en0"
+  alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+  # Alias
+  alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+  alias showfiles="defaults write com.apple.finder AppleShowAllFiles YES && killall Finder"
+  alias hidefiles="defaults write com.apple.finder AppleShowAllFiles NO && killall Finder"
+  alias relaunch="killall Finder"
+  alias brewfolder="cd /usr/local/Cellar/"
+  alias cloudfolder="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
+fi
 
 bindkey -e
 bindkey '[C' forward-word
 bindkey '[D' backward-word
-export LANG=en_US.UTF-8
