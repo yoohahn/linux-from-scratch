@@ -1,6 +1,7 @@
 #!/bin/bash -e
 UBUNTU_CODENAME=$(lsb_release -cs)
 COMPOSE_VERSION=1.25.1
+NVM_VERSION=0.35.3
 
 [ -z "${UBUNTU_CODENAME}" ] && echo "UBUNTU_CODENAME not specified" && exit 1
 [ -z "${HOME}" ] && echo "HOME not specified" && exit 1
@@ -107,7 +108,7 @@ chsh -s /bin/zsh
 cat zshrc-alias > $HOME/.zshrc
 
 ## NVM
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | bash
 
 ## Sanity cleanup
 sudo apt-get update -y ; sudo apt-get upgrade -y ; sudo apt-get autoremove -y
