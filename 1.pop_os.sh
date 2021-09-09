@@ -2,8 +2,8 @@
 NVM_VERSION=0.38.0
 GO_VERSION=1.17
 
-[ -z "${HOME}" ] && echo "HOME not specified" && exit 1
-[ -z "${EMAIL}" ] && echo "EMAIL not specified" && exit 1
+[ -z "${HOME}" ] && echo "\$HOME not specified" && exit 1
+[ -z "${EMAIL}" ] && echo "\$EMAIL not specified" && exit 1
 
 sudo apt-add-repository ppa:git-core/ppa -y
 sudo apt-get update -y ; sudo apt-get upgrade -y
@@ -55,21 +55,18 @@ rm dotnet-install.sh
 sudo apt install zsh -y
 sudo apt install powerline fonts-powerline -y
 git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
-cp $HOME/.oh-my-zsh/templates/zshrc.zsh-template $HOME/.zshrc
-cp $HOME/.zshrc $HOME/.zshrc-orig
-sed -i 's/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"agnoster\"/g' $HOME/.zshrc
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-sed -i 's/plugins\=(/plugins\=(zsh-autosuggestions zsh-syntax-highlighting /g' $HOME/.zshrc
+mkdir -p $HOME/.aliases
+cp .aliases/* $HOME/.aliases
+touch $HOME/.zshrc
+cat zshrc.template > $HOME/.zshrc
 mkdir -p $HOME/.fonts
 wget 'https://github.com/abertsch/Menlo-for-Powerline/archive/master.zip' -O $HOME/.fonts/master.zip
 unzip $HOME/.fonts/master.zip -d $HOME/.fonts/
 rm $HOME/.fonts/master.zip
 fc-cache -vf $HOME/.fonts
 chsh -s /bin/zsh
-
-## Copy alias to ZSH
-cat zshrc-alias > $HOME/.zshrc
 
 ## NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | bash
