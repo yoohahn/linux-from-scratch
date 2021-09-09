@@ -1,0 +1,10 @@
+## Git
+alias g="git"
+alias rebase="git pull --rebase origin "
+alias pull="git pull"
+alias fetch="git fetch"
+alias gs="git status"
+alias gcm="git checkout master"
+alias co="git checkout"
+alias ru="git ru"
+alias gcf="git clean -fdx"

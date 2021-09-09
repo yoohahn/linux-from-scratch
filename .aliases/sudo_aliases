@@ -1,0 +1,7 @@
+## Put commands that you always want to run as root here
+alias sudo='sudo '
+alias htop="sudo htop"
+
+## Wireguard
+alias wg="sudo wg"
+alias wg-quick="sudo wg-quick"

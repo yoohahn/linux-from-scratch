@@ -3,6 +3,9 @@ UBUNTU_CODENAME=$(lsb_release -cs)
 COMPOSE_VERSION=1.25.1
 NVM_VERSION=0.35.3
 
+echo "Not updated in a while"
+exit 1
+
 [ -z "${UBUNTU_CODENAME}" ] && echo "UBUNTU_CODENAME not specified" && exit 1
 [ -z "${HOME}" ] && echo "HOME not specified" && exit 1
 

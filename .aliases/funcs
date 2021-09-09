@@ -1,0 +1,10 @@
+# Convert to gif
+to_gif(){
+  ffmpeg -i $1 -loop 0 -c:v gif -f gif $2
+}
+
+# SSH
+sshtmp() {
+  # Some times we do not want to add a host to our known hosts. Example CircleCI
+  ssh -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "$@"
+}
