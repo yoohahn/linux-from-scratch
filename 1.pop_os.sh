@@ -5,6 +5,9 @@ GO_VERSION=1.17
 [ -z "${HOME}" ] && echo "\$HOME not specified" && exit 1
 [ -z "${EMAIL}" ] && echo "\$EMAIL not specified" && exit 1
 
+# Set to use local time and not utc
+timedatectl set-local-rtc 1 --adjust-system-clock
+
 sudo apt-add-repository ppa:git-core/ppa -y
 sudo apt-get update -y ; sudo apt-get upgrade -y
 
