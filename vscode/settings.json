@@ -12,19 +12,24 @@
     "**/node_modules": true,
     "**/bower_components": true,
     "**/dist": true,
+    "**/lib": true,
     "**/*.map": true
   },
-  "terminal.integrated.shell.linux": "/bin/zsh",
   "terminal.integrated.fontFamily": "Menlo for Powerline",
   "workbench.iconTheme": "vscode-great-icons",
-  "coverage-gutters.lcovname": "coverage/lcov.info",
-  "coverage-gutters.showLineCoverage": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "breadcrumbs.enabled": false,
   "editor.renderControlCharacters": false,
   "gitlens.advanced.messages": {
     "suppressCommitNotFoundWarning": true
   },
-  "telemetry.enableCrashReporter": false,
-  "telemetry.enableTelemetry": false
+  "telemetry.telemetryLevel": "off",
+  "redhat.telemetry.enabled": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "docker.showStartPage": false,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
