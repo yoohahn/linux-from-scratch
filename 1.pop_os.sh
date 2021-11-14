@@ -9,13 +9,22 @@ GO_VERSION=1.17
 timedatectl set-local-rtc 1 --adjust-system-clock
 
 sudo apt-add-repository ppa:git-core/ppa -y
-sudo apt-get update -y ; sudo apt-get upgrade -y
+sudo apt update -y ; sudo apt upgrade -y
 
 mkdir -p $HOME/git
 mkdir -p $HOME/.bin
 
 ## APPS
-sudo apt-get install -y curl git wget terminator net-tools htop gnome-tweak-tool lm-sensors
+sudo apt install -y curl \
+                    git \
+                    wget \
+                    terminator \
+                    net-tools \
+                    htop \
+                    gnome-tweak-tool \
+                    lm-sensors \
+                    ffmpeg \
+                    steam
 
 ## Yubikey
 sudo wget -O /etc/udev/rules.d/70-u2f.rules https://raw.githubusercontent.com/Yubico/libu2f-host/master/70-u2f.rules
@@ -28,12 +37,12 @@ sudo apt update -y
 sudo apt install brave-browser -y
 
 ## DOCKER
-sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
+sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
   | sudo apt-key add - \
   && sudo apt-key fingerprint 0EBFCD88
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt-get update -y && sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+sudo apt update -y && sudo apt install docker-ce docker-ce-cli containerd.io -y
 
 sudo groupadd docker
 sudo usermod -aG docker $USER
@@ -75,7 +84,7 @@ chsh -s /bin/zsh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | bash
 
 ## Sanity cleanup
-sudo apt-get update -y ; sudo apt-get upgrade -y ; sudo apt-get autoremove -y
+sudo apt update -y ; sudo apt upgrade -y ; sudo apt autoremove -y
 
 ## Create ssh key
 ssh-keygen -t ed25519 -C "$EMAIL"
