@@ -91,5 +91,22 @@ sudo apt update -y ; sudo apt upgrade -y ; sudo apt autoremove -y
 ## Create ssh key
 ssh-keygen -t ed25519 -C "$EMAIL"
 
+## Mount NAS in $HOME/Nas/*
+sudo mkdir -p $HOME/Nas
+sudo mkdir -p $HOME/Nas/Cloud
+sudo mkdir -p $HOME/Nas/Downloads
+sudo mkdir -p $HOME/Nas/Media
+
+sudo cat >> /etc/fstab << EOF
+10.2.3.10:/volume1/Cloud                 $HOME/Nas/Cloud          nfs          defaults    0       0
+10.2.3.10:/volume1/Downloads             $HOME/Nas/Downloads      nfs          defaults    0       0
+10.2.3.10:/volume1/Media                 $HOME/Nas/Media          nfs          defaults    0       0
+EOF
+
+# Just mount them manually so we dont have to reboot
+sudo mount -t nfs 10.2.3.10:/volume1/Cloud $HOME/Nas/Cloud
+sudo mount -t nfs 10.2.3.10:/volume1/Downloads $HOME/Nas/Downloads
+sudo mount -t nfs 10.2.3.10:/volume1/Media $HOME/Nas/Media
+
 ## To get rid of some warnings about not symlinking resolv.conf for wireguard 
 sudo dpkg-reconfigure resolvconf
