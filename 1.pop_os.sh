@@ -25,6 +25,7 @@ sudo apt install -y curl \
                     lm-sensors \
                     ffmpeg \
                     mpv \
+                    nfs-common \
                     steam
 
 ## Yubikey
