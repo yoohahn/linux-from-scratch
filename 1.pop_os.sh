@@ -90,3 +90,6 @@ sudo apt update -y ; sudo apt upgrade -y ; sudo apt autoremove -y
 
 ## Create ssh key
 ssh-keygen -t ed25519 -C "$EMAIL"
+
+## To get rid of some warnings about not symlinking resolv.conf for wireguard 
+sudo dpkg-reconfigure resolvconf
