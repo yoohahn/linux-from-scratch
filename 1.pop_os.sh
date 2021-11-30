@@ -85,9 +85,6 @@ chsh -s /bin/zsh
 ## NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | bash
 
-## Sanity cleanup
-sudo apt update -y ; sudo apt upgrade -y ; sudo apt autoremove -y
-
 ## Create ssh key
 ssh-keygen -t ed25519 -C "$EMAIL"
 
@@ -110,3 +107,8 @@ sudo mount -t nfs 10.2.3.10:/volume1/Media $HOME/Nas/Media
 
 ## To get rid of some warnings about not symlinking resolv.conf for wireguard 
 sudo dpkg-reconfigure resolvconf
+
+
+## At last
+## Sanity cleanup
+sudo apt update -y ; sudo apt upgrade -y ; sudo apt autoremove -y
