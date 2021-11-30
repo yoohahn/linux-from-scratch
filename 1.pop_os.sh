@@ -24,6 +24,7 @@ sudo apt install -y curl \
                     gnome-tweak-tool \
                     lm-sensors \
                     ffmpeg \
+                    mpv \
                     steam
 
 ## Yubikey
