@@ -26,6 +26,7 @@ sudo apt install -y curl \
                     ffmpeg \
                     mpv \
                     nfs-common \
+                    screen \
                     steam
 
 ## Yubikey
