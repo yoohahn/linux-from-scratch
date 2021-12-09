@@ -54,6 +54,7 @@ sudo usermod -aG docker $USER
 ## VSCODE SETTINGS
 mkdir -p $HOME/.config/Code/User
 cp ./vscode/settings.json $HOME/.config/Code/User/settings.json
+cp ./vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
 
 ## GoLang
 wget -c https://golang.org/dl/go$GO_VERSION.linux-amd64.tar.gz
