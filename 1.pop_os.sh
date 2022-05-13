@@ -1,6 +1,6 @@
 #!/bin/bash -e
 NVM_VERSION=0.39.0
-GO_VERSION=1.17
+GO_VERSION=1.18.1
 
 [ -z "${HOME}" ] && echo "\$HOME not specified" && exit 1
 [ -z "${EMAIL}" ] && echo "\$EMAIL not specified" && exit 1
