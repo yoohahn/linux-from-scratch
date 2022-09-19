@@ -10,13 +10,13 @@
   },
   "search.exclude": {
     "**/node_modules": true,
-    "**/bower_components": true,
     "**/dist": true,
     "**/lib": true,
     "**/*.map": true
   },
-  "terminal.integrated.fontFamily": "Menlo for Powerline",
+  "workbench.colorTheme": "Default Dark+",
   "workbench.iconTheme": "vscode-great-icons",
+  "terminal.integrated.fontFamily": "Menlo for Powerline",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "breadcrumbs.enabled": false,
   "editor.renderControlCharacters": false,
@@ -35,8 +35,19 @@
           }
         }
       ]
+    },
+    "[Default Light+]": {
+      "textMateRules": [
+        {
+          "scope": ["variable.other.constant", "variable.other.enummember"],
+          "settings": {
+            "foreground": "#001080"
+          }
+        }
+      ]
     }
   },
+  "workbench.startupEditor": "none",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },

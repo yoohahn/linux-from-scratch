@@ -76,7 +76,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/cust
 mkdir -p $HOME/.aliases
 cp .aliases/* $HOME/.aliases
 touch $HOME/.zshrc
-cat zshrc.template > $HOME/.zshrc
+cat zshrc.template.zsh > $HOME/.zshrc
 mkdir -p $HOME/.fonts
 wget 'https://github.com/abertsch/Menlo-for-Powerline/archive/master.zip' -O $HOME/.fonts/master.zip
 unzip $HOME/.fonts/master.zip -d $HOME/.fonts/

@@ -1,0 +1,9 @@
+export GH_TOKEN=""
+export NUGET_AUTH_TOKEN=$GH_TOKEN
+export MEDIA_STORAGE_SAS_QUERY=""
+export TIBBER_API_KEY=""
+# Work
+export ORGANIZATION=draftit
+export GITHUB_ORG="FooBarOrg"
+export DOCKER_REGISTRY=$ORGANIZATION
+export DEVELOPMENT=true
