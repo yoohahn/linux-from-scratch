@@ -87,6 +87,9 @@ chsh -s /bin/zsh
 ## NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | bash
 
+## Lazydocker
+curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+
 ## Create ssh key
 ssh-keygen -t ed25519 -C "$EMAIL"
 
