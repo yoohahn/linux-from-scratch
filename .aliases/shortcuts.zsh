@@ -35,3 +35,6 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 alias reload="exec $SHELL -l"
 alias list_chmod="stat -f '%A %N' "
 
+# Docker
+alias lzd="lazydocker"
+
