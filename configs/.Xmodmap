@@ -3,7 +3,7 @@
 ! Use xev to figure out how to remap and what to
 ! Default settings
 ! xmodmap -pke | grep -P '(108|134)'
-! keycode 108 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift
-! keycode 134 = Super_R NoSymbol Super_R
-keycode 134 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift
-!!!!!keycode 108 = Super_R NoSymbol Super_R
+!! Right win as AltGR
+clear mod4
+add mod4 = Super_L
+keycode 134 = ISO_Level3_Shift
