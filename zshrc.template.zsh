@@ -1,7 +1,9 @@
 ## Set som env vars
-export PATH=$HOME/.local/bin:$HOME/.dotnet:$HOME/.bin:$HOME/.bin/go/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.bin:$HOME/.bin/go/bin:/usr/local/sbin:$PATH
 export DOTNET_CLI_TELEMETRY_OPTOUT="1"
 export EDITOR="nano"
+export DOTNET_ROOT=$HOME/dotnet
+export PATH=$PATH:$HOME/dotnet
 
 ## Detect which `ls` flavor is in use
 colorflag="--color"
