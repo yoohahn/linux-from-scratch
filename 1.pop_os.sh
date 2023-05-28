@@ -1,5 +1,5 @@
 #!/bin/bash -e
-NVM_VERSION=0.39.2
+NVM_VERSION=0.39.3
 GO_VERSION=1.19.3
 
 [ -z "${HOME}" ] && echo "\$HOME not specified" && exit 1
@@ -18,10 +18,8 @@ mkdir -p $HOME/.bin
 sudo apt install -y curl \
                     git \
                     wget \
-                    terminator \
                     net-tools \
                     htop \
-                    gnome-tweak-tool \
                     lm-sensors \
                     ffmpeg \
                     mpv \
@@ -40,12 +38,21 @@ sudo apt update -y
 sudo apt install brave-browser -y
 
 ## DOCKER
-sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
-  | sudo apt-key add - \
-  && sudo apt-key fingerprint 0EBFCD88
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt update -y && sudo apt install docker-ce docker-ce-cli containerd.io -y
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+VERSION_CODENAME=$(lsb_release -cs)
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 sudo groupadd docker
 sudo usermod -aG docker $USER
@@ -69,7 +76,6 @@ rm dotnet-install.sh
 
 ## ZSH
 sudo apt install zsh -y
-sudo apt install powerline fonts-powerline -y
 git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
@@ -78,10 +84,11 @@ cp .aliases/* $HOME/.aliases
 touch $HOME/.zshrc
 cat zshrc.template.zsh > $HOME/.zshrc
 mkdir -p $HOME/.fonts
-wget 'https://github.com/abertsch/Menlo-for-Powerline/archive/master.zip' -O $HOME/.fonts/master.zip
-unzip $HOME/.fonts/master.zip -d $HOME/.fonts/
-rm $HOME/.fonts/master.zip
-fc-cache -vf $HOME/.fonts
+echo "fetch fonts from https://www.nerdfonts.com/font-downloads"
+# wget 'https://github.com/abertsch/Menlo-for-Powerline/archive/master.zip' -O $HOME/.fonts/master.zip
+# unzip $HOME/.fonts/master.zip -d $HOME/.fonts/
+# rm $HOME/.fonts/master.zip
+# fc-cache -vf $HOME/.fonts
 chsh -s /bin/zsh
 
 ## NVM
