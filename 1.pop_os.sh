@@ -26,6 +26,8 @@ sudo apt install -y curl \
                     nfs-common \
                     screen \
                     steam
+## Alacritty: Make sure undercurl works
+curl -sSL https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info | tic -x -
 
 ## Yubikey
 sudo wget -O /etc/udev/rules.d/70-u2f.rules https://raw.githubusercontent.com/Yubico/libu2f-host/master/70-u2f.rules
