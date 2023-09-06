@@ -1,5 +1,5 @@
 #!/bin/bash -e
-NVM_VERSION=0.39.3
+NVM_VERSION=0.39.5
 GO_VERSION=1.19.3
 
 [ -z "${HOME}" ] && echo "\$HOME not specified" && exit 1
