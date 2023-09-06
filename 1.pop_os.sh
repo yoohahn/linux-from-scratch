@@ -25,7 +25,8 @@ sudo apt install -y curl \
                     mpv \
                     nfs-common \
                     screen \
-                    steam
+                    wireguard
+
 ## Alacritty: Make sure undercurl works
 curl -sSL https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info | tic -x -
 
