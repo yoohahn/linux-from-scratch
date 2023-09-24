@@ -1,6 +1,6 @@
 #!/bin/bash -e
 NVM_VERSION=0.39.5
-GO_VERSION=1.19.3
+GO_VERSION=1.21.1
 
 [ -z "${HOME}" ] && echo "\$HOME not specified" && exit 1
 [ -z "${EMAIL}" ] && echo "\$EMAIL not specified" && exit 1
@@ -67,7 +67,7 @@ cp ./vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
 
 ## GoLang
 wget -c https://golang.org/dl/go$GO_VERSION.linux-amd64.tar.gz
-tar -C $HOME/.bin -xvzf go$GO_VERSION.linux-amd64.tar.gz
+tar -C $HOME -xvzf go$GO_VERSION.linux-amd64.tar.gz
 rm go$GO_VERSION.linux-amd64.tar.gz
 
 ## C#
