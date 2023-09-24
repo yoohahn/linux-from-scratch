@@ -5,6 +5,8 @@ GO_VERSION=1.21.1
 [ -z "${HOME}" ] && echo "\$HOME not specified" && exit 1
 [ -z "${EMAIL}" ] && echo "\$EMAIL not specified" && exit 1
 
+flatpak update
+
 # Set to use local time and not utc
 timedatectl set-local-rtc 1 --adjust-system-clock
 
@@ -25,6 +27,7 @@ sudo apt install -y curl \
                     mpv \
                     nfs-common \
                     screen \
+                    sane-airscan \ # Printer support
                     wireguard
 
 ## Alacritty: Make sure undercurl works
@@ -114,13 +117,21 @@ sudo mkdir -p $HOME/Nas/Media
 #10.2.3.10:/volume1/Media                 /home/USER/Nas/Media          nfs          defaults    0       0
 #EOF
 
+## Printer
+sudo cp /etc/sane.d/airscan.conf /etc/sane.d/airscan.conf-BACKUP
+sudo cat > /etc/sane.d/airscan.conf << EOF
+[devices]
+  "Canon TS3400 series" = http://10.2.20.142:80/eSCL
+  "CANON INC. TS3400 series" = http://10.2.20.142:80/wsd/scanservice.cgi, wsd
+EOF
+
 # Just mount them manually so we dont have to reboot
-sudo mount -t nfs 10.2.3.10:/volume1/Cloud $HOME/Nas/Cloud
-sudo mount -t nfs 10.2.3.10:/volume1/Downloads $HOME/Nas/Downloads
-sudo mount -t nfs 10.2.3.10:/volume1/Media $HOME/Nas/Media
+#sudo mount -t nfs 10.2.3.10:/volume1/Cloud $HOME/Nas/Cloud
+#sudo mount -t nfs 10.2.3.10:/volume1/Downloads $HOME/Nas/Downloads
+#sudo mount -t nfs 10.2.3.10:/volume1/Media $HOME/Nas/Media
 
 ## To get rid of some warnings about not symlinking resolv.conf for wireguard 
-sudo dpkg-reconfigure resolvconf
+# sudo dpkg-reconfigure resolvconf
 
 
 ## At last
