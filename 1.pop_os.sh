@@ -27,11 +27,15 @@ sudo apt install -y curl \
                     mpv \
                     nfs-common \
                     screen \
+                    steam \
                     sane-airscan \
                     wireguard \
                     w3m  \
                     w3m-img  \
                     ranger
+
+## Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 ## Alacritty: Make sure undercurl works
 curl -sSL https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info | tic -x -
