@@ -125,6 +125,7 @@ sudo mkdir -p $HOME/Nas
 sudo mkdir -p $HOME/Nas/Cloud
 sudo mkdir -p $HOME/Nas/Downloads
 sudo mkdir -p $HOME/Nas/Media
+sudo chown $USER:$USER $HOME/Nas
 
 #cat >> /etc/fstab << EOF
 #10.2.3.10:/volume1/Cloud                 /home/USER/Nas/Cloud          nfs          defaults    0       0
