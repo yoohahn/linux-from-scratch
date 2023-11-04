@@ -32,6 +32,8 @@ sudo apt install -y curl \
                     wireguard \
                     w3m  \
                     w3m-img  \
+                    doublecmd-gtk \
+                    meld \
                     ranger
 
 ## Rust
