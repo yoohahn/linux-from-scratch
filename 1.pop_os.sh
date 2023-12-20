@@ -57,6 +57,12 @@ echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] http
 sudo apt update -y
 sudo apt install -y brave-browser
 
+## FLoorp
+curl -fsSL https://ppa.ablaze.one/KEY.gpg | sudo gpg --dearmor -o /usr/share/keyrings/Floorp.gpg
+sudo curl -sS --compressed -o /etc/apt/sources.list.d/Floorp.list 'https://ppa.ablaze.one/Floorp.list'
+sudo apt update
+sudo apt install floorp
+
 ## DOCKER
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
