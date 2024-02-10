@@ -1,9 +1,0 @@
-! This is to map altgr on my keyboard so that I can make @ like im used to
-! Load settings: xmodmap ~/.Xmodmap
-! Use xev to figure out how to remap and what to
-! Default settings
-! xmodmap -pke | grep -P '(108|134)'
-!! Right win as AltGR
-clear mod4
-add mod4 = Super_L
-keycode 134 = ISO_Level3_Shift

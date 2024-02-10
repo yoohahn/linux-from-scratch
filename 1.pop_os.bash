@@ -1,6 +1,6 @@
 #!/bin/bash -e
 NVM_VERSION=0.39.5
-GO_VERSION=1.21.1
+GO_VERSION=1.22.0
 
 [ -z "${HOME}" ] && echo "\$HOME not specified" && exit 1
 [ -z "${EMAIL}" ] && echo "\$EMAIL not specified" && exit 1
@@ -35,7 +35,8 @@ sudo apt install -y curl \
                     doublecmd-gtk \
                     meld \
                     ranger \
-                    xclip
+                    xclip \
+                    wireguard
 
 ## Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -46,26 +47,20 @@ curl -sSL https://raw.githubusercontent.com/alacritty/alacritty/master/extra/ala
 ## Yubikey
 sudo wget -O /etc/udev/rules.d/70-u2f.rules https://raw.githubusercontent.com/Yubico/libu2f-host/master/70-u2f.rules
 
-## Thorium Browser
-wget https://dl.thorium.rocks/debian/dists/stable/thorium.list
-sudo mv thorium.list /etc/apt/sources.list.d/
-sudo apt update
-sudo apt install thorium-browser
-
-## BRAVE   
+## BRAVE
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list > /dev/null
 sudo apt update -y
 sudo apt install -y brave-browser
 
 ## FLoorp
 curl -fsSL https://ppa.ablaze.one/KEY.gpg | sudo gpg --dearmor -o /usr/share/keyrings/Floorp.gpg
 sudo curl -sS --compressed -o /etc/apt/sources.list.d/Floorp.list 'https://ppa.ablaze.one/Floorp.list'
-sudo apt update
-sudo apt install floorp
+sudo apt update -y
+sudo apt install -y floorp
 
 ## DOCKER
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get install -y ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -84,11 +79,6 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 sudo groupadd docker
 sudo usermod -aG docker $USER
 ## END DOCKER
-
-## VSCODE SETTINGS
-mkdir -p $HOME/.config/Code/User
-cp ./vscode/settings.json $HOME/.config/Code/User/settings.json
-cp ./vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
 
 ## GoLang
 wget -c https://golang.org/dl/go$GO_VERSION.linux-amd64.tar.gz
@@ -110,12 +100,6 @@ mkdir -p $HOME/.aliases
 cp .aliases/* $HOME/.aliases
 touch $HOME/.zshrc
 cat zshrc.template.zsh > $HOME/.zshrc
-mkdir -p $HOME/.fonts
-echo "fetch fonts from https://www.nerdfonts.com/font-downloads"
-# wget 'https://github.com/abertsch/Menlo-for-Powerline/archive/master.zip' -O $HOME/.fonts/master.zip
-# unzip $HOME/.fonts/master.zip -d $HOME/.fonts/
-# rm $HOME/.fonts/master.zip
-# fc-cache -vf $HOME/.fonts
 chsh -s /bin/zsh
 
 ## NVM
@@ -124,38 +108,27 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh |
 ## Lazydocker
 curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 
+## Lazygit
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit /usr/local/bin
+
 ## Create ssh key
 ssh-keygen -t ed25519 -C "$EMAIL"
 
 ## Mount NAS in $HOME/Nas/*
-sudo mkdir -p $HOME/Nas
-sudo mkdir -p $HOME/Nas/Cloud
-sudo mkdir -p $HOME/Nas/Downloads
-sudo mkdir -p $HOME/Nas/Media
-sudo chown $USER:$USER $HOME/Nas
-
-#cat >> /etc/fstab << EOF
-#10.2.3.10:/volume1/Cloud                 /home/USER/Nas/Cloud          nfs          defaults    0       0
-#10.2.3.10:/volume1/Downloads             /home/USER/Nas/Downloads      nfs          defaults    0       0
-#10.2.3.10:/volume1/Media                 /home/USER/Nas/Media          nfs          defaults    0       0
-#EOF
+mkdir -p $HOME/Nas
+mkdir -p $HOME/Nas/Cloud
+mkdir -p $HOME/Nas/Downloads
+mkdir -p $HOME/Nas/Media
 
 ## Printer
 sudo cp /etc/sane.d/airscan.conf /etc/sane.d/airscan.conf-BACKUP
-sudo cat > /etc/sane.d/airscan.conf << EOF
-[devices]
+echo "[devices]
   "Canon TS3400 series" = http://10.2.20.142:80/eSCL
   "CANON INC. TS3400 series" = http://10.2.20.142:80/wsd/scanservice.cgi, wsd
-EOF
-
-# Just mount them manually so we dont have to reboot
-#sudo mount -t nfs 10.2.3.10:/volume1/Cloud $HOME/Nas/Cloud
-#sudo mount -t nfs 10.2.3.10:/volume1/Downloads $HOME/Nas/Downloads
-#sudo mount -t nfs 10.2.3.10:/volume1/Media $HOME/Nas/Media
-
-## To get rid of some warnings about not symlinking resolv.conf for wireguard 
-# sudo dpkg-reconfigure resolvconf
-
+" | sudo tee /etc/sane.d/airscan.conf > /dev/null
 
 ## At last
 ## Sanity cleanup
