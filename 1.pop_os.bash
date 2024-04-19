@@ -1,6 +1,4 @@
 #!/bin/bash -e
-NVM_VERSION=0.39.5
-GO_VERSION=1.22.0
 
 [ -z "${HOME}" ] && echo "\$HOME not specified" && exit 1
 [ -z "${EMAIL}" ] && echo "\$EMAIL not specified" && exit 1
@@ -80,17 +78,6 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 ## END DOCKER
 
-## GoLang
-wget -c https://golang.org/dl/go$GO_VERSION.linux-amd64.tar.gz
-tar -C $HOME -xvzf go$GO_VERSION.linux-amd64.tar.gz
-rm go$GO_VERSION.linux-amd64.tar.gz
-
-## C#
-wget https://dot.net/v1/dotnet-install.sh
-chmod +x dotnet-install.sh
-./dotnet-install.sh -c Current
-rm dotnet-install.sh
-
 ## ZSH
 sudo apt install zsh -y
 git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
@@ -101,18 +88,6 @@ cp .aliases/* $HOME/.aliases
 touch $HOME/.zshrc
 cat zshrc.template.zsh > $HOME/.zshrc
 chsh -s /bin/zsh
-
-## NVM
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | bash
-
-## Lazydocker
-curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
-
-## Lazygit
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-tar xf lazygit.tar.gz lazygit
-sudo install lazygit /usr/local/bin
 
 ## Create ssh key
 ssh-keygen -t ed25519 -C "$EMAIL"
