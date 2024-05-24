@@ -34,7 +34,14 @@ sudo apt install -y curl \
                     meld \
                     ranger \
                     xclip \
-                    wireguard
+                    wireguard \
+                    blueman \
+                    flameshot \
+                    pavucontrol \
+                    arandr \
+                    feh \
+                    i3 \
+                    i3blocks
 
 ## Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
