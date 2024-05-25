@@ -34,14 +34,13 @@ sudo apt install -y curl \
                     meld \
                     ranger \
                     xclip \
-                    wireguard \
                     blueman \
                     flameshot \
                     pavucontrol \
                     arandr \
                     feh \
-                    i3 \
-                    i3blocks
+                    thunar \
+                    i3 i3blocks i3lock xautolock
 
 ## Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
