@@ -18,3 +18,7 @@ nugetAuth(){
   X_ME=`whoami`
   #dotnet nuget add source https://nuget.pkg.github.com/GITHUB_ORG/index.json -n $ORGANIZATION -u $X_ME -p ${GH_TOKEN} --store-password-in-clear-text
 }
+
+yq() {
+  docker run --rm -i -v "${PWD}":/workdir mikefarah/yq "$@"
+}
