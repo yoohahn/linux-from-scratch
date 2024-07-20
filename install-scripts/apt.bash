@@ -23,4 +23,4 @@ sudo apt install -y curl \
                     flameshot
 
 ## i3
-sudo apt install -y i3 i3blocks i3lock xautolock peek feh thunar blueman pavucontrol arandr rofi lxpolkit
+sudo apt install -y i3 i3blocks i3lock xautolock peek feh thunar blueman pavucontrol arandr rofi lxpolkit playerctl
