@@ -22,5 +22,8 @@ sudo apt install -y curl \
                     xclip \
                     flameshot
 
+## Logitech Superlight Pro X
+sudo apt install -y solaar
+
 ## i3
 sudo apt install -y i3 i3blocks i3lock xautolock peek feh thunar blueman pavucontrol arandr rofi lxpolkit playerctl
