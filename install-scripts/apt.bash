@@ -20,7 +20,8 @@ sudo apt install -y curl \
                     meld \
                     ranger \
                     xclip \
-                    flameshot
+                    flameshot \
+                    corectrl
 
 ## Logitech Superlight Pro X
 sudo apt install -y solaar
