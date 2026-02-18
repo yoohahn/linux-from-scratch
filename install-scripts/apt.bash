@@ -24,6 +24,8 @@ sudo apt install -y curl \
                     corectrl
 
 ## Logitech Superlight Pro X
+sudo add-apt-repository ppa:solaar-unifying/stable
+sudo apt upgrade -y
 sudo apt install -y solaar
 
 ## i3
